@@ -11,6 +11,7 @@ describe('PaginationDto', () => {
   test('should validate with default values', async () => {
     const paginationDto = new PaginationDto();
 
+    // validate es una función de class-validator que valida un objeto y devuelve un array de errores si los hay
     const errors = await validate(paginationDto);
     // console.log(errors);
 
@@ -91,6 +92,7 @@ describe('PaginationDto', () => {
     //* 'plainToInstance' convierte un objeto plano a una instancia de la clase lo que permite aplicar
     //* las validaciones de class-transformer
     const paginationDto = plainToInstance(PaginationDto, input);
+    // console.log(paginationDto);
 
     const errors = await validate(paginationDto);
     // console.log(errors);

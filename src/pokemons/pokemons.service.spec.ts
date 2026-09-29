@@ -21,7 +21,10 @@ describe('PokemonsService', () => {
 
   //* Probar que se cree un pokemon
   test('should create a new pokemon', async () => {
-    const createPokemonDto = { name: 'Pikachu', type: 'Electric' };
+    const createPokemonDto = {
+      name: 'Pikachu',
+      type: 'Electric',
+    };
 
     const result = await service.create(createPokemonDto);
     // console.log(result);
@@ -42,6 +45,7 @@ describe('PokemonsService', () => {
 
     await service.create(createPokemonDto);
     const result = service.create(createPokemonDto);
+    // console.log(result);
 
     await expect(result).rejects.toThrow(BadRequestException);
     await expect(result).rejects.toThrow(msg);
@@ -63,6 +67,7 @@ describe('PokemonsService', () => {
     };
 
     const pokemon = await service.findOne(pokemonId);
+    // console.log(pokemon);
 
     expect(pokemon).toBeDefined();
     expect(pokemon.id).toBe(pokemonId);
@@ -76,6 +81,7 @@ describe('PokemonsService', () => {
     await service.findOne(pokemonId);
 
     const cachedPokemon = await service.findOne(pokemonId);
+    // console.log(cachedPokemon);
 
     expect(cachedPokemon).toBeDefined();
     expect(cachedPokemon.id).toBe(pokemonId);
@@ -87,6 +93,7 @@ describe('PokemonsService', () => {
     const errorMsg = `Pokemon with id ${pokemonId} not found`;
 
     const result = service.findOne(pokemonId);
+    // console.log(result.catch((error) => console.log(error.message)));
 
     await expect(result).rejects.toThrow(NotFoundException);
     await expect(result).rejects.toThrow(errorMsg);
@@ -105,6 +112,7 @@ describe('PokemonsService', () => {
     const cachePokemons = service.paginatedPokemonsCache.get(
       `${page}-${limit}`,
     );
+    // console.log(cachePokemons);
 
     expect(cachePokemons).toBeTruthy();
     expect(cachePokemons).toEqual(pokemons);
@@ -121,6 +129,7 @@ describe('PokemonsService', () => {
     const cachePokemons = service.paginatedPokemonsCache.get(
       `${page}-${limit}`,
     );
+    // console.log(cachePokemons);
 
     expect(cachePokemons).toBeTruthy();
     expect(cachePokemons).toEqual(pokemons);
@@ -131,6 +140,7 @@ describe('PokemonsService', () => {
     const pokemonId = 4;
 
     const pokemon = await service.findOne(pokemonId);
+    // console.log(pokemon);
 
     // Verifica que el resultado tenga las propiedades esperadas
     expect(pokemon).toHaveProperty('id');
@@ -156,6 +166,7 @@ describe('PokemonsService', () => {
     const updatePokemonDto = { name: 'Charmander', type: 'Fire' };
 
     const updatedPokemon = await service.update(pokemonId, updatePokemonDto);
+    // console.log(updatedPokemon);
 
     expect(updatedPokemon).toEqual({
       id: pokemonId,
@@ -173,6 +184,7 @@ describe('PokemonsService', () => {
     const errorMsg = `Pokemon with id ${pokemonId} not found`;
 
     const result = service.update(pokemonId, updatePokemonDto);
+    // console.log(result.catch((error) => console.log(error.message)));
 
     await expect(result).rejects.toThrow(NotFoundException);
     await expect(result).rejects.toThrow(errorMsg);
@@ -184,6 +196,7 @@ describe('PokemonsService', () => {
     const msg = `Pokemon #charmander removed`;
 
     const result = await service.remove(pokemonId);
+    // console.log({ result });
 
     expect(result).toBe(msg);
   });
@@ -194,6 +207,7 @@ describe('PokemonsService', () => {
     const errorMsg = `Pokemon with id ${pokemonId} not found`;
 
     const result = service.remove(pokemonId);
+    // console.log(result.catch((error) => console.log(error.message)));
 
     await expect(result).rejects.toThrow(NotFoundException);
     await expect(result).rejects.toThrow(errorMsg);

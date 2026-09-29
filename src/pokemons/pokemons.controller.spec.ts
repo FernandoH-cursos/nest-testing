@@ -47,7 +47,7 @@ describe('PokemonsController', () => {
     expect(controller).toBeDefined();
   });
 
-  //* Probar que el método create del controlador llama al servicio con los datos correctos
+  //* Probar que el micio con los datétodo create del controlador llama al servos correctos
   test('should have called the service with correct data (create)', async () => {
     const pokemonDto = {
       name: 'bulbasaur',
@@ -108,6 +108,7 @@ describe('PokemonsController', () => {
     jest.spyOn(service, 'findAll').mockResolvedValue(mockPokemons);
 
     const pokemons = await controller.findAll(paginationDto);
+    // console.log(pokemons);
 
     expect(pokemons).toEqual(mockPokemons);
     expect(pokemons.length).toBe(mockPokemons.length);

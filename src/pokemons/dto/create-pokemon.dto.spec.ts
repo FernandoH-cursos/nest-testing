@@ -30,6 +30,7 @@ describe('CreatePokemonDto', () => {
     createPokemonDto.sprites = ['sprite1.png', 'sprite2.png'];
 
     const errors = await validate(createPokemonDto);
+    // console.log(errors);
 
     expect(errors.length).toBe(0);
   });

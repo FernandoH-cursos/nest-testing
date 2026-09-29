@@ -114,6 +114,7 @@ export class PokemonsService {
     this.pokemonCache.delete(id);
 
     this.paginatedPokemonsCache.forEach((pokemons, key) => {
+      // Filtrar los pokemons para eliminar el que tiene el id especificado
       this.paginatedPokemonsCache.set(
         key,
         pokemons.filter((p) => p.id !== id),
