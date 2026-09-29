@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../../../src/app.module';
 import { Pokemon } from 'src/pokemons/entities/pokemon.entity';
 
-import * as request from 'supertest';
+import request from 'supertest';
 
 describe('Pokemons (e2e)', () => {
   //* Variable para inicializar la app o modulo a probar con E2E
@@ -31,6 +31,7 @@ describe('Pokemons (e2e)', () => {
   //* Probar creación de un pokemon si no se envía un body en el POST
   test('/pokemons (POST) - with no body', async () => {
     const response = await request(app.getHttpServer()).post('/pokemons');
+    // console.log(response.body);
 
     const errorMsg = 'Bad Request';
 
@@ -60,6 +61,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/pokemons')
       .send(body);
+    // console.log(response.body);
 
     const createdPokemon = {
       name: body.name,
@@ -83,6 +85,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer())
       .get('/pokemons')
       .query(params);
+    // console.log(response.body);
 
     const errorMsg = 'Bad Request';
 
@@ -112,6 +115,7 @@ describe('Pokemons (e2e)', () => {
       .query(params);
 
     const paginatedPokemons = response.body as Pokemon[];
+    // console.log(paginatedPokemons);
 
     expect(response.statusCode).toBe(200);
     expect(paginatedPokemons).toBeInstanceOf(Array);
@@ -141,6 +145,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer()).get(
       `/pokemons/${pokemonId}`,
     );
+    // console.log(response.body);
 
     const pokemon = {
       id: 2,
@@ -168,6 +173,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer()).get(
       `/pokemons/${pokemonId}`,
     );
+    // console.log(response.body);
 
     const errorMsg = 'Not Found';
 
@@ -191,6 +197,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer())
       .patch(`/pokemons/${pokemonId}`)
       .send(body);
+    // console.log(response.body);
 
     const errorMsg = 'Not Found';
 
@@ -218,6 +225,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer())
       .patch(`/pokemons/${pokemonId}`)
       .send({});
+    // console.log(response.body);
 
     expect(response.body).toEqual(pokemon);
   });
@@ -233,6 +241,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer())
       .patch(`/pokemons/${pokemonId}`)
       .send(body);
+    // console.log(response.body);
 
     const pokemon = {
       id: pokemonId,
@@ -252,6 +261,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer()).delete(
       `/pokemons/${pokemonId}`,
     );
+    // console.log(response.text);
 
     const successMsg = 'Pokemon #caterpie removed';
 
@@ -265,6 +275,7 @@ describe('Pokemons (e2e)', () => {
     const response = await request(app.getHttpServer()).delete(
       `/pokemons/${pokemonId}`,
     );
+    // console.log(response.body);
 
     const errorMsg = 'Not Found';
 
